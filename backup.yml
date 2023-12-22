@@ -1,0 +1,18 @@
+---
+- hosts: all
+  gather_facts: true
+  connection: network_cli
+  vars:
+    date: "{{ lookup('pipe', 'date +%Y%m%d-%H%M') }}"
+ 
+  tasks:
+   - name: Running config lezen
+     ios_command:
+       commands:
+         - show run   
+     register: config
+     
+   - name: directory 
+     copy: 
+       content: "{{ config.stdout[0] }}"
+       dest: "~/ansible/routers/backups/show_run_{{ inventory_hostname }}-{{ date }}.txt"

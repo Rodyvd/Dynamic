@@ -1,0 +1,25 @@
+---
+- name: NAT config
+  hosts: csr1
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+
+  - name: NAT config
+    ios_config:
+      lines:
+        - access-list 10 permit 192.168.0.0 0.0.255.255
+        - ip nat inside source list 10 interface GigabitEthernet 1 overload
+
+  - name: interface inside
+    ios_config:
+      lines:
+        - ip nat inside
+      parents: interface GigabitEthernet 2
+
+  - name: interface outside
+    ios_config:
+      lines:
+        - ip nat outside
+      parents: interface GigabitEthernet 1

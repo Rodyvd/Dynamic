@@ -1,0 +1,65 @@
+---
+- name: show commando's
+  hosts: routers
+  gather_facts: false
+
+  tasks:
+    - name: arp
+      raw: "show arp"
+
+      register: print_output
+    - debug: var=print_output.stdout_lines
+
+    - name: ip CEF
+      raw: "show ip cef"
+
+      register: print_output
+    -  debug: var=print_output.stdout_lines
+
+    - name: ip route
+      raw: "show ip route"
+
+      register: print_output
+    -  debug: var=print_output.stdout_lines
+
+    - name: nat translations
+      raw: "show ip nat translations"
+
+      register: print_output
+    - debug: var=print_output.stdout_lines
+
+    - name: nat statistics
+      raw: "show ip nat statistics"
+
+      register: print_output
+    - debug: var=print_output.stdout_lines
+
+    - name: dhcp binding
+      raw: "show ip dhcp binding"
+
+      register: print_output
+    -  debug: var=print_output.stdout_lines
+
+    - name: dhcp pool
+      raw: "show ip dhcp pool"
+
+      register: print_output
+    -  debug: var=print_output.stdout_lines
+
+    - name: ip bgp
+      raw: "show ip bgp"
+
+      register: print_output
+    -  debug: var=print_output.stdout_lines
+
+    - name: ip bgp summary
+      raw: "show ip bgp summary"
+
+      register: print_output
+    -  debug: var=print_output.stdout_lines
+
+    - name: ip bgp neighbor
+      raw: "show ip bgp neighbor"
+
+      register: print_output
+    -  debug: var=print_output.stdout_lines
